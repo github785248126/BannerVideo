@@ -11,6 +11,9 @@ import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.util.List;
 
@@ -19,7 +22,9 @@ public class MainActivity extends AppCompatActivity {
     private ViewPager viewPager;
     private PagerAdapter pagerAdapter;
     private int mPosition = 0;
+    private boolean animCheck;
     private List<ViewModel> viewModel;
+    private Animation animation;
     private String[] permissions = {Manifest.permission.READ_EXTERNAL_STORAGE};
 
     @Override
@@ -27,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initView();
+        initFloating();
         initPermissions();
     }
 
@@ -40,6 +46,23 @@ public class MainActivity extends AppCompatActivity {
         pagerAdapter = new PagerAdapter(viewModel);
         viewPager.setAdapter(pagerAdapter);
         loaderView();
+    }
+
+    private void initFloating() {
+        floating.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (animCheck){ //顺时针旋转
+                    animCheck = false;
+                    foAnim();
+                }else { //逆时针旋转
+                    animCheck = true;
+                    toAnim();
+                }
+                animation.setFillAfter(true);   //动画结束停留在旋转后的位置
+                floating.startAnimation(animation);
+            }
+        });
     }
 
     /**
@@ -56,6 +79,14 @@ public class MainActivity extends AppCompatActivity {
         } else {
             countDownTimer.start();
         }
+    }
+
+    private void toAnim(){
+        animation = AnimationUtils.loadAnimation(this, R.anim.rotate_floating_positive);
+    }
+
+    private void foAnim(){
+        animation = AnimationUtils.loadAnimation(this, R.anim.rotate_floating_negative);
     }
 
     /**
