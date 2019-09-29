@@ -14,6 +14,7 @@ import android.os.CountDownTimer;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.RelativeLayout;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.util.List;
 
@@ -21,6 +22,11 @@ public class MainActivity extends AppCompatActivity {
     private FloatingActionButton floating;
     private ViewPager viewPager;
     private PagerAdapter pagerAdapter;
+    private RelativeLayout relativeLayout;
+    private FloatingActionButton floating_1;
+    private FloatingActionButton floating_2;
+    private FloatingActionButton floating_3;
+    private boolean isFloat_3;
     private int mPosition = 0;
     private boolean animCheck;
     private List<ViewModel> viewModel;
@@ -39,6 +45,10 @@ public class MainActivity extends AppCompatActivity {
     private void initView() {
         viewPager = findViewById(R.id.viewPager);
         floating = findViewById(R.id.floating);
+        relativeLayout = findViewById(R.id.rel_floating_group);
+        floating_1 = findViewById(R.id.floating_1);
+        floating_2 = findViewById(R.id.floating_2);
+        floating_3 = findViewById(R.id.floating_3);
     }
 
     private void initData() {
@@ -63,6 +73,26 @@ public class MainActivity extends AppCompatActivity {
                 floating.startAnimation(animation);
             }
         });
+
+        floating_2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ShareUtil.shareText(MainActivity.this,"这是一段分享的文字","分享文本");
+            }
+        });
+
+        floating_3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (isFloat_3){
+                    isFloat_3 = false;
+                    floating_3.setImageResource(R.drawable.icon_praise);
+                }else {
+                    isFloat_3 = true;
+                    floating_3.setImageResource(R.drawable.icon_praise_ok);
+                }
+            }
+        });
     }
 
     /**
@@ -82,10 +112,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void toAnim(){
+        relativeLayout.setVisibility(View.VISIBLE);
         animation = AnimationUtils.loadAnimation(this, R.anim.rotate_floating_positive);
     }
 
     private void foAnim(){
+        relativeLayout.setVisibility(View.GONE);
         animation = AnimationUtils.loadAnimation(this, R.anim.rotate_floating_negative);
     }
 
@@ -141,6 +173,12 @@ public class MainActivity extends AppCompatActivity {
                 initData();
             }
         }
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        loaderView();
     }
 
     @Override

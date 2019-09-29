@@ -32,4 +32,6 @@ dependencies {
     //  Glide
     implementation 'com.github.bumptech.glide:glide:3.8.0'
     implementation 'com.google.android.material:material:1.0.0'
+    //  点赞控件
+    implementation 'com.sackcentury:shinebutton:0.2.0'
 }

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -8,14 +9,61 @@
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/viewPager"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent" />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/floating"
-        android:layout_width="wrap_content"
+    <RelativeLayout
+        android:id="@+id/rel_floating"
+        android:layout_width="60dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
-        android:layout_margin="20dp"
-        android:src="@drawable/icon_float"/>
+        android:layout_alignParentBottom="true"
+        android:layout_margin="20dp">
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/floating"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_centerInParent="true"
+            android:src="@drawable/icon_float" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rel_floating_group"
+        android:layout_width="60dp"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/rel_floating"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="20dp"
+        android:animateLayoutChanges="true"
+        android:visibility="visible">
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/floating_1"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/icon_email"
+            app:fabCustomSize="60dp" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/floating_2"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_above="@+id/floating_1"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="20dp"
+            android:src="@drawable/icon_share"
+            app:fabCustomSize="50dp" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/floating_3"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_above="@+id/floating_2"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="20dp"
+            android:src="@drawable/icon_praise"
+            app:fabCustomSize="45dp" />
+    </RelativeLayout>
 </RelativeLayout>
